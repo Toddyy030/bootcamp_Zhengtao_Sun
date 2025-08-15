@@ -1,7 +1,5 @@
 
 
 ## Problem Statement
-We aim to determine whether the trading strategy is valid for deploy in the real world market.In order to validate the trading strategy, it is important to run backtest with historical data from the stock market, and judge the validation
-of the trading strategy by important metrics like annualized return, maximum drawdown, and sharpe ratio. It matters for portfolio managers to deploy
-the stratgey or not. 
+Excess return is a valuable trading signal for portfolio constructions and stock selection in quantitative stock investing. Predicting stocks’ future excess return allows portfolio managers to make informed decisions ahead of time, and improve portfolio strategies. This project aims to leverage reliable historical stock data (OHLCV) and benchmarks in the past 5 years from public open API like yfinance and Alpha vantage, and construct factors like momentum factors and value factors. We will use machine learning regression models as the tool predicts one day ahead excess return. Model performance will be evaluated through backtesting, and deliver actionable insights to help portfolio managers to construct strategies with stable return. 
 
