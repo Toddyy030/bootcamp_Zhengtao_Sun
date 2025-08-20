@@ -4,6 +4,7 @@ from typing import Literal
 import requests
 from dotenv import load_dotenv
 import os
+from pathlib import Path
 
 def subtract_columns(df:pd.DataFrame,column1:str,column2:str):
     result = df[column1] - df[column2]
@@ -44,3 +45,21 @@ def daily_tickerFetcher(symbol: str,start:str,end:str) -> pd.DataFrame:
         df_api = df_api.reset_index()
         print("loading data from alpha vantage API is successful")
     return df_api
+
+def detect_format(path:str):
+    s = str(path).lower()
+    if s.endswith(".csv"):
+        return "csv"
+    elif s.endswith(".parquet") or s.endswith('.pq') or s.endswith('.parq'):
+        return "parquet"
+    
+def read_df(path:str):
+    p = Path(path)
+    format = detect_format(p)
+    if format == "csv":
+        return pd.read_csv(p)
+    elif format == "parquet":
+        try:
+            return pd.read_parquet(p)
+        except Exception as e:
+            raise RuntimeError('Parquet engine not available. Install pyarrow or fastparquet.') from e
