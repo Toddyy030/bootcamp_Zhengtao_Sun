@@ -1,4 +1,7 @@
 import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, r2_score
+import pandas as pd
 
 def mean_impute(a: np.ndarray) -> np.ndarray:
     m = np.nanmean(a)
@@ -49,3 +52,20 @@ def bootstrap_predictions(X, y, x_grid, n_boot=500, seed=111):
         preds.append(m.predict(x_grid))
     P = np.vstack(preds)
     return P.mean(axis=0), np.percentile(P, 2.5, axis=0), np.percentile(P, 97.5, axis=0)
+
+def evaluate_model(df, feature, target):
+    X = df[[feature]].values
+    y = df[target].values
+    
+    model = LinearRegression()
+    model.fit(X, y)
+    
+    y_pred = model.predict(X)
+    
+    return {
+        "slope": model.coef_[0],
+        "intercept": model.intercept_,
+        "R2": r2_score(y, y_pred),
+        "MAE": mean_absolute_error(y, y_pred),
+        "n_samples": len(df)
+    }

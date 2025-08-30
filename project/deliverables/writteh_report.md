@@ -1,0 +1,2 @@
+## Executive summary
+After applying sensitivity test, I found out that the predictive model is not sensitive to cleaning data strategy. When I applied filling nan with median & mean, and drop missing values, the slope, intercept, R^2, MAE are not signficantly changed. Stakeholders could choose any of three methods to train the predictive model based on their demand. 

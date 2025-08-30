@@ -63,3 +63,4 @@ def read_df(path:str):
             return pd.read_parquet(p)
         except Exception as e:
             raise RuntimeError('Parquet engine not available. Install pyarrow or fastparquet.') from e
+    
